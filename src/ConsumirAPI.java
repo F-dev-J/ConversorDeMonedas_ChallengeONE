@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.InputMismatchException;
 
 public class ConsumirAPI {
     public Monedas moneda(String tipoDeCambio){
@@ -20,10 +21,9 @@ public class ConsumirAPI {
                     .send(request, HttpResponse.BodyHandlers.ofString());
             return new Gson().fromJson(response.body(), Monedas.class);
         }
-        catch (IOException | InterruptedException e){
+        catch (IOException | InterruptedException | InputMismatchException e){
             throw new RuntimeException(e);
         }
-
 
     }
     public double obtenerTasa(String base, String destino) {
